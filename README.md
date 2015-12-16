@@ -72,6 +72,11 @@ ddns --help
 
 # agree to terms and get domain
 ddns --random --email user@example.com --agree
+
+# the default is to use the ip address from which
+# you can the command, but you can also assign the
+# ip manually
+ddns --random --email user@example.com --agree -a '127.0.0.1'
 ```
 
 Example domain:
