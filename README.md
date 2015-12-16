@@ -6,6 +6,11 @@
 
 CLI for node-letsencrypt modeled after the official client.
 
+* Free SSL Certificates
+* 90-day certificate lifetime
+* One-off standalone registration / renewal
+* On-the-fly registration / renewal via webroot
+
 ## Install Node
 
 For **Windows**:
