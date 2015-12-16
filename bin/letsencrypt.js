@@ -81,11 +81,11 @@ cli.main(function(_, options) {
     var handlers;
     
     if (args.standalone) {
-      handlers = require('../lib/standalone');
+      handlers = require('../lib/standalone').create();
       handlers.startServers(args.http01Ports || [80], args.tlsSni01Port || [443, 5001]);
     }
     else if (args.webrootPath) {
-      handlers = require('../lib/webroot');
+      handlers = require('../lib/webroot').create(args);
     }
 
     LE.create({}, handlers).register(args, function (err, results) {
