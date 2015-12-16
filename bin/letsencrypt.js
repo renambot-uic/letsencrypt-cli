@@ -16,14 +16,18 @@ cli.parse({
 , 'fullchain-path': [ false, " Path to where new fullchain.pem (cert + chain) is saved", 'string', ':conf/live/:hostname/fullchain.pem' ]
 , 'chain-path': [ false, " Path to where new chain.pem is saved", 'string', ':conf/live/:hostname/chain.pem' ]
 , 'domain-key-path': [ false, " Path to privkey.pem to use for domain (default: generate new)", 'string' ]
-, 'config-dir': [ false, " Configuration directory.", 'string'/*, '/etc/letsencrypt'*/ ]
+, 'config-dir': [ false, " Configuration directory.", 'string', '~/letsencrypt/etc/' ]
 , server: [ false, " ACME Directory Resource URI.", 'string', 'https://acme-v01.api.letsencrypt.org/directory)' ]
 , standalone: [ false, " Obtain certs using a \"standalone\" webserver.", 'boolean', true ]
 //, manual: [ false, " Provide laborious manual instructions for obtaining a cert (default: false)", 'boolean', false ]
 , webroot: [ false, " Obtain certs by placing files in a webroot directory.", 'boolean', false ]
 , 'webroot-path': [ false, " public_html / webroot path.", 'string' ]
 //, 'standalone-supported-challenges': [ false, " Supported challenges, order preferences are randomly chosen. (default: http-01,tls-sni-01)", 'string', 'http-01,tls-sni-01']
+, 'work-dir': [ false, "(ignored)", 'string', '~/letsencrypt/var/lib/' ]
+, 'logs-dir': [ false, "(ignored)", 'string', '~/letsencrypt/var/log/' ]
 });
 
 cli.main(function(args, options) {
+  console.log(args);
+  console.log(options);
 });
