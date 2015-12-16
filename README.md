@@ -45,19 +45,20 @@ letsencrypt certonly \
   --domains example.com,www.example.com \
   --server https://acme-staging.api.letsencrypt.org/directory \
 
-ls ~/letsencrypt/etc
+ls ~/letsencrypt/etc/live
 ```
 
 ### WebRoot
 
 ```bash
-letsencrypt certonly \
+sudo letsencrypt certonly \
   --agree-tos --email john.doe@example.com \
   --webroot --webroot-path /srv/www/acme-challenge \
+  --config-dir /etc/letsencrypt \
   --domains example.com,www.example.com \
   --server https://acme-staging.api.letsencrypt.org/directory
 
-ls ~/letsencrypt/etc
+ls /etc/letsencrypt/live/
 ```
 
 ## Run without Root
@@ -68,6 +69,15 @@ you can use `setcap` to do so. (it may need to be run any time you reinstall nod
 
 ```bash
 sudo setcap cap_net_bind_service=+ep /usr/local/bin/node
+```
+
+By default `node-letsencrypt` assumes your home directory `~/letsencrypt/`, but if
+you really want to use `/etc/letsencrypt`, `/var/lib/letsencrypt/`, and `/var/log/letsencrypt`
+you could change the permissions on them. **Probably a BAD IDEA**. Probabry a security risk.
+
+```
+# PROBABLY A BAD IDEA
+sudo chown -R $(whoami) /etc/letsencrypt /var/lib/letsencrypt /var/log/letsencrypt 
 ```
 
 ## Command line Options
