@@ -6,11 +6,11 @@ CLI for node-letsencrypt modeled after the official client.
 
 ## Install Node
 
-For Windows:
+For **Windows**:
 
 Choose **Stable** from <https://nodejs.org/en/>
 
-For Linux and OS X:
+For Linux and **OS X**:
 
 ```
 curl -L bit.ly/iojs-min | bash
