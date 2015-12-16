@@ -44,6 +44,8 @@ letsencrypt certonly \
   --standalone \
   --domains example.com,www.example.com \
   --server https://acme-staging.api.letsencrypt.org/directory \
+
+ls ~/letsencrypt/etc
 ```
 
 ### WebRoot
@@ -54,6 +56,8 @@ letsencrypt certonly \
   --webroot --webroot-path /srv/www/acme-challenge \
   --domains example.com,www.example.com \
   --server https://acme-staging.api.letsencrypt.org/directory
+
+ls ~/letsencrypt/etc
 ```
 
 ## Run without Root
