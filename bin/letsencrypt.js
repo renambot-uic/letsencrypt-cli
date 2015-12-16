@@ -19,7 +19,7 @@ cli.parse({
 , 'domain-key-path': [ false, " Path to privkey.pem to use for domain (default: generate new)", 'string' ]
 , 'config-dir': [ false, " Configuration directory.", 'string', '~/letsencrypt/etc/' ]
 , server: [ false, " ACME Directory Resource URI.", 'string', 'https://acme-v01.api.letsencrypt.org/directory)' ]
-, standalone: [ false, " Obtain certs using a \"standalone\" webserver.", 'boolean', true ]
+, standalone: [ false, " Obtain certs using a \"standalone\" webserver.", 'boolean', false ]
 //, manual: [ false, " Provide laborious manual instructions for obtaining a cert (default: false)", 'boolean', false ]
 , webroot: [ false, " Obtain certs by placing files in a webroot directory.", 'boolean', false ]
 , 'webroot-path': [ false, " public_html / webroot path.", 'string' ]
@@ -79,18 +79,20 @@ cli.main(function(_, options) {
 
     var LE = require('letsencrypt');
     var handlers;
-    
-    if (args.standalone) {
+
+    if (args.webrootPath) {
+      handlers = require('../lib/webroot').create(args);
+    }
+    else /*if (args.standalone)*/ {
       handlers = require('../lib/standalone').create();
       handlers.startServers(args.http01Ports || [80], args.tlsSni01Port || [443, 5001]);
     }
-    else if (args.webrootPath) {
-      handlers = require('../lib/webroot').create(args);
-    }
 
-    LE.create({}, handlers).register(args, function (err, results) {
+    // let LE know that we're handling standalone / webroot here
+    LE.create({ manual: true }, handlers).register(args, function (err, results) {
       if (err) {
-        console.error(err.stack);
+        console.error('[Error]: letsencrypt');
+        console.error(err);
         return;
       }
 
