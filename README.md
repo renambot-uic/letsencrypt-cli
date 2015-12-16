@@ -4,7 +4,19 @@ CLI for node-letsencrypt modeled after the official client.
 
 (IN-PROGRESS)
 
-## Install
+## Install Node
+
+For Windows:
+
+Choose **Stable** from <https://nodejs.org/en/>
+
+For Linux and OS X:
+
+```
+curl -L bit.ly/iojs-min | bash
+```
+
+# Install LetsEncrypt
 
 ```bash
 npm install -g letsencrypt-cli
