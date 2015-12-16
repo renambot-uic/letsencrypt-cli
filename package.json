@@ -1,0 +1,38 @@
+{
+  "name": "letsencrypt-cli",
+  "version": "1.0.0",
+  "description": "CLI for node-letsencrypt modeled after the official client",
+  "main": "index.js",
+  "bin": {
+    "letsencrypt": "bin/letsencrypt.js",
+    "letsencrypt-node": "bin/letsencrypt.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Daplie/node-letsencrypt-cli.git"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "acme",
+    "boulder",
+    "letsencrypt",
+    "le",
+    "ssl",
+    "https",
+    "tls",
+    "free"
+  ],
+  "author": "AJ ONeal <aj@daplie.com> (https://daplie.com)",
+  "license": "(MIT OR Apache-2.0)",
+  "bugs": {
+    "url": "https://github.com/Daplie/node-letsencrypt-cli/issues"
+  },
+  "homepage": "https://github.com/Daplie/node-letsencrypt-cli",
+  "dependencies": {
+    "cli": "^0.11.1"
+  }
+}
