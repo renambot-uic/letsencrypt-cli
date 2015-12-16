@@ -1,8 +1,15 @@
+# NOT YET PUBLISHED
+
+(IN-PROGRESS) 2015-12-16 - expect it in about 12 hours
+
 # letsencrypt-cli
 
 CLI for node-letsencrypt modeled after the official client.
 
-(IN-PROGRESS)
+* Free SSL Certificates
+* 90-day certificate lifetime
+* One-off standalone registration / renewal
+* On-the-fly registration / renewal via webroot
 
 ## Install Node
 
