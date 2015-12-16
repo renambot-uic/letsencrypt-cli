@@ -99,7 +99,7 @@ Options:
 
       --domain-key-path STRING  Path to privkey.pem to use for domain (default: generate new)
 
-      --config-dir STRING       Configuration directory.
+      --config-dir STRING       Configuration directory. (Default is ~/letsencrypt/etc/)
 
       --server [STRING]         ACME Directory Resource URI. (Default is https://acme-v01.api.letsencrypt.org/directory))
 
