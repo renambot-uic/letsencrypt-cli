@@ -27,7 +27,49 @@ cli.parse({
 , 'logs-dir': [ false, "(ignored)", 'string', '~/letsencrypt/var/log/' ]
 });
 
-cli.main(function(args, options) {
-  console.log(args);
-  console.log(options);
+// ignore certonly and extraneous arguments
+cli.main(function(_, options) {
+  var args = {};
+  var homedir = require('homedir')(); 
+
+  Object.keys(options).forEach(function (key) {
+    var val = options[key];
+
+    if ('string' === typeof val) {
+      val = val.replace(/^~/, homedir);
+    }
+
+    key = key.replace(/\-([a-z0-9A-Z])/g, function (c) { return c[1].toUpperCase(); });
+    args[key] = val;
+  });
+
+  Object.keys(args).forEach(function (key) {
+    var val = args[key];
+
+    if ('string' === typeof val) {
+      val = val.replace(/\:conf/, args.configDir);
+    }
+
+    args[key] = val;
+  });
+
+  var LE = require('letsencrypt');
+  var handlers;
+  
+  if (args.standalone) {
+    handlers = require('../lib/standalone');
+  }
+  else if (args.webrootPath) {
+    handlers = require('../lib/webroot');
+  }
+
+  LE.create({}, handlers).register(args, function (err, results) {
+    if (err) {
+      console.error(err.stack);
+      return;
+    }
+
+    // should get back account, path to certs, pems, etc?
+    console.log(results);
+  });
 });
