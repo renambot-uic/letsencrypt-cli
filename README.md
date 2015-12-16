@@ -40,7 +40,7 @@ letsencrypt certonly \
   --agree-tos --email john.doe@example.com \
   --standalone \
   --domains example.com,www.example.com \
-  --server https://acme-staging.api.letsencrypt.org/directory
+  --server https://acme-staging.api.letsencrypt.org/directory \
 ```
 
 ### WebRoot
@@ -51,6 +51,16 @@ letsencrypt certonly \
   --webroot --webroot-path /srv/www/acme-challenge \
   --domains example.com,www.example.com \
   --server https://acme-staging.api.letsencrypt.org/directory
+```
+
+## Run without Root
+
+If you'd like to allow node.js to use privileged ports `80` and `443`
+(and everything under 1024 really) without being run as `root` or `sudo`,
+you can use `setcap` to do so. (it may need to be run any time you reinstall node as well)
+
+```bash
+sudo setcap cap_net_bind_service=+ep /usr/local/bin/node
 ```
 
 ## Command line Options
