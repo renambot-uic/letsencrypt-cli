@@ -61,6 +61,25 @@ sudo letsencrypt certonly \
 ls /etc/letsencrypt/live/
 ```
 
+## Test with a free domain
+
+```bash
+# Install Daplie DNS
+npm install -g ddns-cli
+
+# see terms of use
+ddns --help
+
+# agree to terms and get domain
+ddns --random --email user@example.com --agree
+```
+
+Example domain:
+
+```
+rubber-duck-42.daplie.me
+```
+
 ## Run without Root
 
 If you'd like to allow node.js to use privileged ports `80` and `443`
