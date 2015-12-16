@@ -128,3 +128,5 @@ Options:
 
   -h, --help                    Display help and usage details
 ```
+
+Note: some of the options may not be fully implemented. If you encounter a problem, please report a bug on the issues page.
