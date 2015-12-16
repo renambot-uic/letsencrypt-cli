@@ -24,13 +24,23 @@ npm install -g letsencrypt-cli
 
 ## Usage
 
+These commands are shown using the **testing server**.
+
+When you want to use the **live server**,
+simply remove the `--server https://acme-staging.api.letsencrypt.org/directory`
+or change it to `--server https://acme-v01.api.letsencrypt.org/directory`.
+
+**Note**: This has really only been tested with single domains so if
+multiple domains doesn't work for you, file a bug.
+
 ### Standalone
 
 ```bash
 letsencrypt certonly \
   --agree-tos --email john.doe@example.com \
   --standalone \
-  --domains example.com,www.example.com
+  --domains example.com,www.example.com \
+  --server https://acme-staging.api.letsencrypt.org/directory
 ```
 
 ### WebRoot
@@ -39,7 +49,8 @@ letsencrypt certonly \
 letsencrypt certonly \
   --agree-tos --email john.doe@example.com \
   --webroot --webroot-path /srv/www/acme-challenge \
-  --domains example.com,www.example.com
+  --domains example.com,www.example.com \
+  --server https://acme-staging.api.letsencrypt.org/directory
 ```
 
 ## Command line Options
