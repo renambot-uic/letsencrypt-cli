@@ -30,6 +30,7 @@ cli.parse({
 
 // ignore certonly and extraneous arguments
 cli.main(function(_, options) {
+  console.log('');
   var args = {};
   var homedir = require('homedir')(); 
 
