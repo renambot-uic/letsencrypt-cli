@@ -58,6 +58,12 @@ cli.main(function(_, options) {
     args.domains = args.domains.split(',');
   }
 
+  if (!(Array.isArray(args.domains) && args.domains.length) || !args.email || !args.agreeTos) {
+    console.error("\nUsage: letsencrypt certonly --standalone --domains example.com --email user@example.com --agree-tos");
+    console.error("\nSee letsencrypt --help for more details\n");
+    return;
+  }
+
   if (args.tlsSni01Port) {
     args.tlsSni01Port = args.tlsSni01Port.split(',').map(function (port) {
       return parseInt(port, 10);
@@ -89,7 +95,15 @@ cli.main(function(_, options) {
     }
 
     // let LE know that we're handling standalone / webroot here
-    LE.create({ manual: true }, handlers).register(args, function (err, results) {
+    LE.create({
+      manual: true
+    , debug: args.debug
+    , configDir: args.configDir
+    , privkeyPath: ':conf/live/:hostname/privkey.pem' //args.privkeyPath
+    , fullchainPath: args.fullchainPath
+    , certPath: args.certPath
+    , chainPath: args.chainPath
+    }, handlers).register(args, function (err, results) {
       if (err) {
         console.error('[Error]: letsencrypt');
         console.error(err);
@@ -101,8 +115,14 @@ cli.main(function(_, options) {
       }
 
       // should get back account, path to certs, pems, etc?
-      console.log('results');
-      console.log(results);
+      console.log('\nCertificates installed at:');
+      console.log(Object.keys(results).filter(function (key) {
+        return /Path/.test(key);
+      }).map(function (key) {
+        return results[key];
+      }).join('\n'));
+
+      process.exit(0);
     });
   });
 });
