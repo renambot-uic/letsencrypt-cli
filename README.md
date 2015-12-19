@@ -38,28 +38,56 @@ multiple domains doesn't work for you, file a bug.
 
 ### Standalone
 
+You can run standalone mode to get a cert **on the server** you will be
+using it for over ports 80 and 443 (or 5001) like so:
+
 ```bash
 letsencrypt certonly \
   --agree-tos --email john.doe@example.com \
   --standalone \
   --domains example.com,www.example.com \
   --server https://acme-staging.api.letsencrypt.org/directory \
+  --config-dir ~/letsencrypt/etc
+```
 
+Then you can see your certs at `~/letsencrypt/etc/live`.
+
+```
 ls ~/letsencrypt/etc/live
 ```
 
-### WebRoot
+This option is great for testing, but since it requires the use of
+the same ports that your webserver needs, it isn't a good choice
+for production.
+
+### WebRoot (for production)
+
+You can specify the path to where you keep your `index.html` with `webroot`.
+
+For example, if I want to get a domain for `example.com` and my `index.html` is
+at `/srv/www/example.com`, then I would use this command:
 
 ```bash
 sudo letsencrypt certonly \
   --agree-tos --email john.doe@example.com \
-  --webroot --webroot-path /srv/www/acme-challenge \
+  --webroot --webroot-path /srv/www/example.com \
   --config-dir /etc/letsencrypt \
   --domains example.com,www.example.com \
+  --renew-by-default \
   --server https://acme-staging.api.letsencrypt.org/directory
+```
 
+Note that we use `sudo` because in this example we are using `/etc/letsencrypt`
+as the cert directory rather than `~/letsencrypt/etc`, which we used in the previous example.
+
+Then see your brand new shiny certs:
+
+```
 ls /etc/letsencrypt/live/
 ```
+
+You can use a cron job to run the script above every 80 days (the certificates expire after 90 days)
+so that you always have fresh certificates.
 
 ## Test with a free domain
 
