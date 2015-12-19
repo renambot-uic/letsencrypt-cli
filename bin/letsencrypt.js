@@ -106,8 +106,8 @@ cli.main(function(_, options) {
     , chainPath: args.chainPath
     }, handlers).register(args, function (err, results) {
       if (err) {
-        console.error('[Error]: letsencrypt');
-        console.error(err);
+        console.error('[Error]: letsencrypt-cli');
+        console.error(err.stack || err);
         return;
       }
 
