@@ -1,4 +1,4 @@
-# letsencrypt-cli
+# letsencrypt-cli for node.js
 
 CLI for node-letsencrypt modeled after the official client.
 
