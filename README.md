@@ -29,9 +29,10 @@ npm install -g letsencrypt-cli
 
 These commands are shown using the **testing server**.
 
-When you want to use the **live server**,
-simply remove the `--server https://acme-staging.api.letsencrypt.org/directory`
-or change it to `--server https://acme-v01.api.letsencrypt.org/directory`.
+Want to use the **live server**?
+
+1. remove the `--server https://acme-staging.api.letsencrypt.org/directory`
+2. or change it to `--server https://acme-v01.api.letsencrypt.org/directory`
 
 **Note**: This has really only been tested with single domains so if
 multiple domains doesn't work for you, file a bug.
