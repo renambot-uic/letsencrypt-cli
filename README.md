@@ -74,7 +74,6 @@ sudo letsencrypt certonly \
   --webroot --webroot-path /srv/www/example.com \
   --config-dir /etc/letsencrypt \
   --domains example.com,www.example.com \
-  --renew-by-default \
   --server https://acme-staging.api.letsencrypt.org/directory
 ```
 
