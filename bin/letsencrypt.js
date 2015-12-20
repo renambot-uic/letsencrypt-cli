@@ -13,9 +13,9 @@ cli.parse({
 , 'tls-sni-01-port': [ false, " Port number to perform tls-sni-01 challenge. Boulder in testing mode defaults to 5001. (default: 443,5001)" ]
 , 'http-01-port': [ false, " Port used in the SimpleHttp challenge. (default: 80)" ]
 , 'rsa-key-size': [ false, " Size (in bits) of the RSA key.", 'int', 2048 ]
-, 'cert-path': [ false, " Path to where new cert.pem is saved", 'string',':conf/live/:hostname/cert.pem' ]
-, 'fullchain-path': [ false, " Path to where new fullchain.pem (cert + chain) is saved", 'string', ':conf/live/:hostname/fullchain.pem' ]
-, 'chain-path': [ false, " Path to where new chain.pem is saved", 'string', ':conf/live/:hostname/chain.pem' ]
+, 'cert-path': [ false, " Path to where new cert.pem is saved", 'string',':config/live/:hostname/cert.pem' ]
+, 'fullchain-path': [ false, " Path to where new fullchain.pem (cert + chain) is saved", 'string', ':config/live/:hostname/fullchain.pem' ]
+, 'chain-path': [ false, " Path to where new chain.pem is saved", 'string', ':config/live/:hostname/chain.pem' ]
 , 'domain-key-path': [ false, " Path to privkey.pem to use for domain (default: generate new)", 'string' ]
 , 'config-dir': [ false, " Configuration directory.", 'string', '~/letsencrypt/etc/' ]
 , server: [ false, " ACME Directory Resource URI.", 'string', 'https://acme-v01.api.letsencrypt.org/directory)' ]
@@ -32,7 +32,7 @@ cli.parse({
 cli.main(function(_, options) {
   console.log('');
   var args = {};
-  var homedir = require('homedir')(); 
+  var homedir = require('homedir')();
 
   Object.keys(options).forEach(function (key) {
     var val = options[key];
@@ -49,7 +49,7 @@ cli.main(function(_, options) {
     var val = args[key];
 
     if ('string' === typeof val) {
-      val = val.replace(/\:conf/, args.configDir);
+      val = val.replace(/\:config/, args.configDir);
     }
 
     args[key] = val;
@@ -100,7 +100,7 @@ cli.main(function(_, options) {
       manual: true
     , debug: args.debug
     , configDir: args.configDir
-    , privkeyPath: ':conf/live/:hostname/privkey.pem' //args.privkeyPath
+    , privkeyPath: ':config/live/:hostname/privkey.pem' //args.privkeyPath
     , fullchainPath: args.fullchainPath
     , certPath: args.certPath
     , chainPath: args.chainPath
