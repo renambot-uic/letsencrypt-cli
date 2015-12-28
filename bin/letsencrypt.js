@@ -10,8 +10,8 @@ cli.parse({
 , duplicate: [ false, " Allow getting a certificate that duplicates an existing one", 'boolean', false ]
 , 'agree-tos': [ false, " Agree to the Let's Encrypt Subscriber Agreement", 'boolean', false ]
 , debug: [ false, " show traces and logs", 'boolean', false ]
-, 'tls-sni-01-port': [ false, " Port number to perform tls-sni-01 challenge. Boulder in testing mode defaults to 5001. (default: 443,5001)" ]
-, 'http-01-port': [ false, " Port used in the SimpleHttp challenge. (default: 80)" ]
+, 'tls-sni-01-port': [ false, " Port number to perform tls-sni-01 challenge. Boulder in testing mode defaults to 5001. (default: 443,5001)", 'string' ]
+, 'http-01-port': [ false, " Port used in the SimpleHttp challenge. (default: 80)", 'string' ]
 , 'rsa-key-size': [ false, " Size (in bits) of the RSA key.", 'int', 2048 ]
 , 'cert-path': [ false, " Path to where new cert.pem is saved", 'string',':config/live/:hostname/cert.pem' ]
 , 'fullchain-path': [ false, " Path to where new fullchain.pem (cert + chain) is saved", 'string', ':config/live/:hostname/fullchain.pem' ]
@@ -66,12 +66,16 @@ cli.main(function(_, options) {
   }
 
   if (args.tlsSni01Port) {
+    // [@agnat]: Coerce to string. cli returns a number although we request a string.
+    args.tlsSni01Port = "" + args.tlsSni01Port;
     args.tlsSni01Port = args.tlsSni01Port.split(',').map(function (port) {
       return parseInt(port, 10);
     });
   }
 
   if (args.http01Port) {
+    // [@agnat]: Coerce to string. cli returns a number although we request a string.
+    args.http01Port = "" + args.http01Port;
     args.http01Port = args.http01Port.split(',').map(function (port) {
       return parseInt(port, 10);
     });
@@ -92,7 +96,7 @@ cli.main(function(_, options) {
     }
     else /*if (args.standalone)*/ {
       handlers = require('../lib/standalone').create();
-      handlers.startServers(args.http01Ports || [80], args.tlsSni01Port || [443, 5001]);
+      handlers.startServers(args.http01Port || [80], args.tlsSni01Port || [443, 5001]);
     }
 
     // let LE know that we're handling standalone / webroot here
