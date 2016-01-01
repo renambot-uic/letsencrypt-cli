@@ -40,7 +40,7 @@ multiple domains doesn't work for you, file a bug.
 ### Standalone
 
 You can run standalone mode to get a cert **on the server** you will be
-using it for over ports 80 and 443 (or 5001) like so:
+using it for over ports **80 and 443 (or 5001)** like so:
 
 ```bash
 letsencrypt certonly \
