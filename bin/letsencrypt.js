@@ -115,6 +115,14 @@ cli.main(function(_, options) {
         return;
       }
 
+      if (!results || ('object' !== typeof results)) {
+        console.error("Error: An unknown error occurred. My best guess is that we got an error that we're not used to from the ACME server and accidentally interpretted it as a success... or forgot to expose the error.");
+        console.error(results);
+        err = new Error("Here's a stack trace, in case it helps:");
+        console.error(err.stack);
+        return;
+      }
+
       if (handlers.closeServers) {
         handlers.closeServers();
       }
