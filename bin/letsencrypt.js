@@ -102,6 +102,7 @@ cli.main(function(_, options) {
     // let LE know that we're handling standalone / webroot here
     LE.create({
       manual: true
+    , server: args.server
     , debug: args.debug
     , configDir: args.configDir
     , privkeyPath: ':config/live/:hostname/privkey.pem' //args.privkeyPath
